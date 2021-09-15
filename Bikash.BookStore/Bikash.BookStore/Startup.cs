@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,16 +38,34 @@ namespace Bikash.BookStore
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+            // All the below are Middle wares 
+            app.Use(async (context,next)=>
             {
-                endpoints.MapRazorPages();
+                await context.Response.WriteAsync("Hello from 1st middle ware");
+
+                await next();
+
+                await context.Response.WriteAsync("Hello from 1st middle ware Response");
             });
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("Hello from 2nd middle ware");
+
+                //await next();
+            });
+
+            //app.UseStaticFiles();
+
+            //app.UseRouting();
+
+            //app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapRazorPages();
+            //});
         }
     }
 }
