@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/Bikash.BookStore/.vs/Bikash.BookStore
+/Bikash.BookStore/Bikash.BookStore/bin/Debug/netcoreapp3.1
+/Bikash.BookStore/Bikash.BookStore/obj
